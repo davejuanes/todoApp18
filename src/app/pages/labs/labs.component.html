@@ -7,7 +7,7 @@
   <hr />
   <h2>{{ "Hola".repeat(4) }}</h2>
   <p>La suma es 3 + 3 es {{ 3 + 3 }}</p>
-  <p>Hola soy {{ name }} y tengo {{ age }} años de edad</p>
+  <p>Hola soy {{ name() }} y tengo {{ age }} años de edad</p>
   <hr />
   <img [src]="img" alt="" />
   <input type="number" [value]="person().age" />
@@ -20,27 +20,37 @@
   <button (click)="clickHandler()">Click Me!</button>
   <button (dblclick)="clickHandler()">Double Me!</button>
   <p>(Change)</p>
-  <input type="number" [value]="person().age" (change)="changeHandler($event)" />
+  <input
+    type="number"
+    [value]="person().age"
+    (change)="changeHandler($event)"
+  />
   <p>(Change)</p>
   <input type="text" [value]="person().name" (change)="changeHandler($event)" />
   <p>(KeyDown)</p>
-  <input type="text" [value]="person().name" (keydown)="keydownHandler($event)" />
+  <input
+    type="text"
+    [value]="person().name"
+    (keydown)="keydownHandler($event)"
+  />
   <p>(KeyDown Shift + t)</p>
-  <input type="text" [value]="person().name" (keydown.shift.t)="clickHandler()" />
-  <hr>
+  <input
+    type="text"
+    [value]="person().name"
+    (keydown.shift.t)="clickHandler()"
+  />
+  <hr />
   <h2>Signal's</h2>
   <p>Hola soy {{ name() }}</p>
   <input type="text" [value]="name()" (change)="changeHandler($event)" />
   <p>name: {{ name() }}</p>
-  <hr>
+  <hr />
   <h2>Estructuras de control</h2>
   <ul>
     <p>Total: {{ tasks().length }}</p>
-    <li *ngFor="let task of tasks(); index as i">
-        {{ i }} {{ task }}
-    </li>
+    <li *ngFor="let task of tasks(); index as i">{{ i }} {{ task }}</li>
   </ul>
-  <hr>
+  <hr />
   <h2>NG IF</h2>
   <div class="" *ngIf="1 !== 1">
     <p>My condition</p>
@@ -48,15 +58,26 @@
   <div class="" *ngIf="name() == 'Dave'">
     <p>{{ name() }}</p>
   </div>
+  @if (name() == 'Dave') {
+    <div>Soy Dave</div>
+  }
   <p>Anidación</p>
   <input type="number" [value]="person().age" (change)="changeAge($event)" />
-  <div class="" *ngIf="person().name == 'Dave' && person().age > 18; else elseBlock">
+  <div
+    class=""
+    *ngIf="person().name == 'Dave' && person().age > 18; else elseBlock"
+  >
     <p>Soy {{ person().name }} y soy mayor de 18</p>
   </div>
-  <ng-template #elseBlock>
-    Soy Dave y soy menor de 18
-  </ng-template>
+  <ng-template #elseBlock> Soy Dave y soy menor de 18 </ng-template>
   <hr>
+  <h2>If else new sintax</h2>
+  @if (person().name == 'Dave' && person().age > 18) {
+    <p>Soy {{ person().name }} y soy mayor de 18</p>
+  } @else {
+    <p>Soy Dave y soy menor de 18</p>
+  }
+  <hr />
   <h2>Switch</h2>
   <input type="text" [value]="person().name" (change)="changeName($event)" />
   <div [ngSwitch]="person().name">
@@ -65,23 +86,33 @@
     <p *ngSwitchCase="'Mario'">Yo soy {{ person().name }}</p>
     <p *ngSwitchDefault>Yo no soy nadie</p>
   </div>
-  <hr>
-  <h2>Control de propuedades y envio con formControl (attr. puede modificar cualquier propiedad)</h2>
-  <input type="color" [formControl]="colorCtrl">
+  <hr />
+  <h2>
+    Control de propuedades y envio con formControl (attr. puede modificar
+    cualquier propiedad)
+  </h2>
+  <input type="color" [formControl]="colorCtrl" />
   <p>Color: {{ colorCtrl.value }}</p>
   <svg>
     <g>
-      <rect x="0" y="0" width="100" height="100" [attr.fill]="colorCtrl.value" /> <!-- attr deja modificar los valores -->
+      <rect
+        x="0"
+        y="0"
+        width="100"
+        height="100"
+        [attr.fill]="colorCtrl.value"
+      />
+      <!-- attr deja modificar los valores -->
     </g>
   </svg>
-  <hr>
+  <hr />
   <h2>Styles</h2>
-  <input type="number" [formControl]="widthCtrl">
+  <input type="number" [formControl]="widthCtrl" />
   <span class="box" [style.width.px]="widthCtrl.value"></span>
-  <hr>
+  <hr />
   <h2>Activar clases de forma dinamica de acuerdo a un estado</h2>
   <p>
-    <input type="text" [formControl]="nameCtrl"><br>
+    <input type="text" [formControl]="nameCtrl" /><br />
     <span
       class="message-error"
       [class.show]="nameCtrl.invalid && nameCtrl.touched"
@@ -90,6 +121,6 @@
     </span>
   </p>
   <p>
-    <input type="text">
+    <input type="text" />
   </p>
 </div>
