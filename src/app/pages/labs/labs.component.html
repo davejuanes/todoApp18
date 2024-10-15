@@ -123,4 +123,42 @@
   <p>
     <input type="text" />
   </p>
+  <hr>
+  <h2>New sintax loop for</h2>
+  <ul>
+    <p>Total: {{ tasks().length }}</p>
+    <li *ngFor="let task of tasks(); index as i">{{ i }} {{ task }}</li>
+  </ul>
+  <ul>
+    @for (task of tasks(); track task; let i = $index) {
+      <li>{{ i }} {{ task }}</li>
+    } @empty {
+      <li><strong>La lista esta vacia</strong></li>
+    }
+  </ul>
+  <hr>
+  <h2>New switch</h2>
+  <input type="text" [value]="person().name" (change)="changeName($event)" />
+  <div [ngSwitch]="person().name">
+    <p *ngSwitchCase="'Dave'">Yo soy {{ person().name }}</p>
+    <p *ngSwitchCase="'Carlita'">Yo soy {{ person().name }}</p>
+    <p *ngSwitchCase="'Mario'">Yo soy {{ person().name }}</p>
+    <p *ngSwitchDefault>Yo no soy nadie</p>
+  </div>
+  <div>
+    @switch (person().name) {
+      @case('Dave') {
+        <p>Soy dave</p>
+      }
+      @case('Julian') {
+        <p>Soy dave</p>
+      }
+      @case('Pablo') {
+        <p>Soy dave</p>
+      }
+      @default {
+        <p>Yo no soy nadie</p>
+      }
+    }
+  </div>
 </div>
